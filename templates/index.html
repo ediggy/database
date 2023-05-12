@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{% block title %} All Tests {% endblock %}</h2>
+<a href="{{ url_for('test_1')}}">Test 1</a>
+<a href="{{ url_for('test_2')}}">Test 2</a>
+<a href="{{ url_for('test_3')}}">Test 3</a>
+<a href="{{ url_for('final')}}">Final</a>
+
+
+<h2>All Games</h2>
+
+{% for post in posts %}
+<div class='post'>
+    <h2>{{ post['title'] }}</h2>
+    <h3>Description</h3>
+    <p>{{ post['content'] }}</p>
+    <h3>Genre: </h3>
+    <p>{{ post['genre'] }}</p>
+    <h3>Developer: </h3>
+    <p>{{ post['developer'] }}</p>
+    <a href="{{ url_for('edit', id=post['id']) }}">Edit</a>
+
+    <form action="{{ url_for('delete', id=post['id'])}}" method="POST">
+        <input type="submit" value="Delete Game"
+        onclick="return confirm('Are you sure you want to delete this Game?')">
+    </form>
+</div>
+{% endfor %}
+
+{% endblock %}
